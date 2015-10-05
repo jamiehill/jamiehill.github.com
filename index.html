@@ -86,54 +86,7 @@
 <div class="content" id="home">
 	<div class="wrapper">
 		<div class="posts">
-			<article class="post tag-getting-started">
-	<div class="avatar_title" id="aritcle-1">
-		<h1 class="title">
-			<a href="welcome-to-ghost/">Welcome to Ghost</a>
-		</h1>
-
-	</div>
-	<section>
-			<p></p><p>You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at <code>&lt;your blog URL&gt;/ghost/</code>. When you arrive, you can select this post from a list on the left and see a preview of it on the right. Click the little pencil icon at the top of the preview to edit this post and read the next section!</p>
-
-<h2 id="gettingstarted">Getting Started</h2>
-
-<p>Ghost uses something called Markdown for writing. Essentially, it's a shorthand way to manage your post formatting as you write!</p>
-
-<p>Writing in Markdown is really easy. In the left hand panel of Ghost, you simply write as you normally would. Where appropriate, you can use <em>shortcuts</em> to <strong>style</strong> your content. For example, a list:</p>
-
-<ul>
-<li>Item number one</li>
-<li>Item number two
-<ul><li>A nested item</li></ul></li>
-<li>A final item</li>
-</ul>
-
-<p>or with numbers!</p>
-
-<ol>
-<li>Remember to buy some milk  </li>
-<li>Drink the milk  </li>
-<li>Tweet that I remembered to buy the milk, and drank it</li>
-</ol>
-
-<h3 id="links">Links</h3>
-
-<p>Want to link to a source? No problem. If you paste in a URL, like <a href="http://ghost.org">http://ghost.org</a> - it'll automatically be linked up. But if you</p>
-	</section>
-	<div class="author_read">
-		<div class="author">
-				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
-				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
-			<time class="post-date" datetime="2015-10-05"><i class="fa fa-clock-o"></i> 5 Oct, 2015</time>
-			<a class="disqus_comment" href="welcome-to-ghost/index.html#disqus_thread"></a>
-		</div>
-		<p class="read_more">
-			<a href="welcome-to-ghost/">read more</a>
-		</p>
-	</div>
-</article>
-<article class="post">
+			<article class="post">
 	<div class="avatar_title" id="aritcle-64">
 		<h1 class="title">
 			<a href="enabling-babel-es7-features-in-jspm/">Enabling Babel ES7 Features in SystemJS/JSPM</a>
@@ -336,6 +289,35 @@ public</code></pre>
 		</div>
 		<p class="read_more">
 			<a href="routing-overloaded-controller-actions-in-play-framework-2/">read more</a>
+		</p>
+	</div>
+</article>
+<article class="post">
+	<div class="avatar_title" id="aritcle-42">
+		<h1 class="title">
+			<a href="adding-multiple-assets-to-your-swc-using-apache-ant-and-adobe-flex-component-compiler-compc/">Adding Multiple Assets To Your Swc Using Apache ANT And Adobe Flex Component Compiler (Compc)</a>
+		</h1>
+
+	</div>
+	<section>
+			<p></p><p>This is a topic I felt I should cover, as after many hours spent Googling, I still haven’t found a viable solution, and neither does it seem, have scores of other Flex Developers.</p>
+
+<p>If you need to package an arbitary set of asset files in a swc, the process is not only laborious, but actually unworkable. The Compc Ant task, provides the ‘include-file’ property, that lets you explicitly tell the compiler, that that file should be included in the resultant swc. On large scale enterprise applications – that may contain hundreds of asset files – there is no way of dynamically including the contents of a certain folder.</p>
+
+<pre><code class="language-python">&lt;include-file name="an_image.png" value="path/to/image/folder/an_image.png"/&gt;  
+</code></pre>
+
+<p>After scratching my head for a considerable time, extending Compc and adding an easier mechanism to do this, seemed like the only option. So here it is – Compcx (CompcExtended).</p>
+	</section>
+	<div class="author_read">
+		<div class="author">
+				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
+				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
+			<time class="post-date" datetime="2013-04-16"><i class="fa fa-clock-o"></i> 16 Apr, 2013</time>
+			<a class="disqus_comment" href="adding-multiple-assets-to-your-swc-using-apache-ant-and-adobe-flex-component-compiler-compc/index.html#disqus_thread"></a>
+		</div>
+		<p class="read_more">
+			<a href="adding-multiple-assets-to-your-swc-using-apache-ant-and-adobe-flex-component-compiler-compc/">read more</a>
 		</p>
 	</div>
 </article>

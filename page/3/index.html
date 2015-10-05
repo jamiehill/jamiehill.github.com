@@ -66,56 +66,6 @@
 	<div class="wrapper">
 		<div class="posts">
 			<article class="post">
-	<div class="avatar_title" id="aritcle-47">
-		<h1 class="title">
-			<a href="../../spark-invalidateskinstate-vs-getcurrentskinstate-gotcha/">Spark invalidateSkinState vs getCurrentSkinState Gotcha</a>
-		</h1>
-
-	</div>
-	<section>
-			<p></p><p>Sometimes coding can be a painful experience. When you’re seemingly following all the rules as defined by the API you’re using, yet things just don’t want to work as you know they should.</p>
-
-<pre><code class="language-javascript">override protected function commitProperties():void  
-{
-     super.commitProperties();
-
-     // do something
-
-     invalidateSkinState();
-}
-</code></pre>
-
-<p>I one such recent predicament, the <strong>getCurrentSkinState</strong> was simply not being triggered after issuing an ‘invalidateSkinState’. Upon testing, the issue seemed sporadic, with getCurrentSkinState being called most of the time, but not ALL the time as I would expect.</p>
-
-<p>The case in question, was a custom PopUpButton, that simply wouldn’t close if clicking outside the target area. A multitude of breakpoints later with my temper rising, I finally discovered the issue. I’d been calling ‘invalidateSkinState’ inside ‘commitProperties’ but after the super.commitProperties call. Is better illustrated with some code:</p>
-
-<pre><code class="language-javascript">override protected function commitProperties():void  
-{
-     super.commitProperties();
-
-     // do something
-
-     invalidateSkinState();
-}
-</code></pre>
-
-<p>This would seem like a sensible line of approach, considering the Spark component lifecycle architecture – pooling property changes on the component, assessing the components required new state in commitProperties, before commanding the skin to adopt the new state, and represent it visually.</p>
-
-<p>Let’s look at the method ‘invalidateSkinState’ and ‘commitProperties’ on SkinnableComponent,</p>
-	</section>
-	<div class="author_read">
-		<div class="author">
-				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
-				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
-			<time class="post-date" datetime="2012-05-02"><i class="fa fa-clock-o"></i> 2 May, 2012</time>
-			<a class="disqus_comment" href="../../spark-invalidateskinstate-vs-getcurrentskinstate-gotcha/index.html#disqus_thread"></a>
-		</div>
-		<p class="read_more">
-			<a href="../../spark-invalidateskinstate-vs-getcurrentskinstate-gotcha/">read more</a>
-		</p>
-	</div>
-</article>
-<article class="post">
 	<div class="avatar_title" id="aritcle-48">
 		<h1 class="title">
 			<a href="../../remove-spark-buttonbar-selection-toggle-behaviour/">Remove Spark ButtonBar Selection Toggle Behaviour</a>
@@ -261,6 +211,32 @@ The</code></pre>
 		</div>
 		<p class="read_more">
 			<a href="../../finding-an-htmlloader-dom-elements-absolute-position-in-adobe-air/">read more</a>
+		</p>
+	</div>
+</article>
+<article class="post">
+	<div class="avatar_title" id="aritcle-54">
+		<h1 class="title">
+			<a href="../../target-flash-11-and-air-3-merging-air-sdk-into-flex-sdk/">Target Flash 11 and AIR 3 - Merging AIR SDK into Flex SDK</a>
+		</h1>
+
+	</div>
+	<section>
+			<p></p><p>There are many people out there that seem to go through the laborious process of manually merging the Adobe Air SDk and Adobe’s Flex SDK every time a new iteration of either comes out.</p>
+
+<p>I’ve used this method in the past, and not only is it time consuming, it’s prone to errors, having not put the right thing in the right place.</p>
+
+<p>On MacOS, dumping a folder in place of another, overwrites that folder in it’s entirety. Killing any folders that don’t exist in the folder you’re copying over the top. Not ideal. Windows is the opposite – it overwrites individual files at your prompt.</p>
+	</section>
+	<div class="author_read">
+		<div class="author">
+				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
+				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
+			<time class="post-date" datetime="2011-10-16"><i class="fa fa-clock-o"></i> 16 Oct, 2011</time>
+			<a class="disqus_comment" href="../../target-flash-11-and-air-3-merging-air-sdk-into-flex-sdk/index.html#disqus_thread"></a>
+		</div>
+		<p class="read_more">
+			<a href="../../target-flash-11-and-air-3-merging-air-sdk-into-flex-sdk/">read more</a>
 		</p>
 	</div>
 </article>
