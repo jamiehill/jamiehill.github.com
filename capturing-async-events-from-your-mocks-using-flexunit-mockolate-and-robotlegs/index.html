@@ -1,0 +1,274 @@
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>Capturing Async Events from your Mocks using FlexUnit, Mockolate and Robotlegs</title>
+	<meta name="description," content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+
+	<link rel="shortcut icon" href="http://localhost:2368/assets/favicon.png?v=e3bde5a47e">
+
+	<link rel="stylesheet" href="../assets/css/all.min.css?v=e3bde5a47e">
+	<link rel="stylesheet" media="(max-width: 699px)" href="../assets/css/jass_mob.min.css?v=e3bde5a47e">
+	<link rel="stylesheet" media="(min-width: 700px)" href="../assets/css/jass_des.min.css?v=e3bde5a47e">
+
+	<meta name="twitter:widgets:theme" content="light">
+	<meta name="twitter:widgets:link-color" content="#2E8CDA">
+	<meta name="twitter:widgets:border-color" content="#E8E8E8">
+	<link rel="canonical" href="index.html">
+    <meta name="referrer" content="origin">
+    
+    <meta property="og:site_name" content="TiltBlog">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Capturing Async Events from your Mocks using FlexUnit, Mockolate and Robotlegs">
+    <meta property="og:description" content="I thought I’d write this up, as being a relative new comer to using Mockolate with my Unit Tests, I’ve spent an inexorbitant length of time trying to figure out what wasn’t working and why. If I...">
+    <meta property="og:url" content="http://localhost:2368/capturing-async-events-from-your-mocks-using-flexunit-mockolate-and-robotlegs/">
+    <meta property="article:published_time" content="2011-03-10T16:20:00.000Z">
+    <meta property="article:modified_time" content="2015-10-04T15:22:57.000Z">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Capturing Async Events from your Mocks using FlexUnit, Mockolate and Robotlegs">
+    <meta name="twitter:description" content="I thought I’d write this up, as being a relative new comer to using Mockolate with my Unit Tests, I’ve spent an inexorbitant length of time trying to figure out what wasn’t working and why. If I...">
+    <meta name="twitter:url" content="http://localhost:2368/capturing-async-events-from-your-mocks-using-flexunit-mockolate-and-robotlegs/">
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "TiltBlog",
+    "author": {
+        "@type": "Person",
+        "name": "James Hill",
+        "image": "//www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&d=mm&r=x",
+        "url": "http://localhost:2368/author/james",
+        "sameAs": null,
+        "description": null
+    },
+    "headline": "Capturing Async Events from your Mocks using FlexUnit, Mockolate and Robotlegs",
+    "url": "http://localhost:2368/capturing-async-events-from-your-mocks-using-flexunit-mockolate-and-robotlegs/",
+    "datePublished": "2011-03-10T16:20:00.000Z",
+    "dateModified": "2015-10-04T15:22:57.000Z",
+    "description": "I thought I’d write this up, as being a relative new comer to using Mockolate with my Unit Tests, I’ve spent an inexorbitant length of time trying to figure out what wasn’t working and why. If I..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.7">
+    <link rel="alternate" type="application/rss+xml" title="TiltBlog" href="../rss/index.html">
+</head>
+<body class="post-template">
+	<header>
+	<div class="wrapper">
+
+		<div id="logo">
+			<a href="../">TiltBlog</a>
+		</div><nav>
+		<ul class="nav">
+		    <li class="nav-home"><a href="../">Home</a></li>
+		</ul>
+</nav>
+
+		
+		<div class="mobile_social">
+			<h5>Follow me</h5>
+			<div class="icons">
+				<h4>Follow me</h4>
+<div class="icons">
+  <section class="blog--social"><div class="icons">
+
+      <a class="icons--icon icon" target="_blank" href="http://facebook.com/nike" title="facebook">
+          <i class="fa fa-facebook"></i>
+      </a>
+
+    <a href="http://localhost:2368/capturing-async-events-from-your-mocks-using-flexunit-mockolate-and-robotlegs/url_of_your_perfil" class="icons--icon icon" title="" target="_blank">
+      <i class="fa fa-twitch"></i>
+    </a>
+
+
+  </div></section>
+</div>
+			</div>
+			<small class="copy">creado con ghost por <a href="http://gulp.dev">ghosbuzter</a></small>
+		</div>
+	</div>
+</header>
+
+	
+<main class="content" role="main">
+    <div class="wrapper">
+        <div class="post">
+            <article id="63" class="post">
+                <div class="avatar_title">
+                    <h1 class="title">
+                        <a href="index.html">Capturing Async Events from your Mocks using FlexUnit, Mockolate and Robotlegs</a>
+                    </h1>
+                </div>
+                <section>
+                  <p>I thought I’d write this up, as being a relative new comer to using <a href="http://mockolate.org/">Mockolate</a> with my Unit Tests, I’ve spent an inexorbitant length of time trying to figure out what wasn’t working and why. If I can save some-one else even a fraction of the time I wasted, I’ll die a happy man.</p>
+
+<p>When mocking a class using <strong>Mockolate</strong> – my latest favourite new testing tool – it’s really important to make sure you set up your mock declarations, member variables and assertions in the correct order.</p>
+
+<p>To explain further, consider the following <a href="http://www.robotlegs.org/">Robotlegs</a> Command…</p>
+
+<pre><code class="language-javascript">package  
+{
+    import org.robotlegs.mvcs.Command;
+
+    public class ExampleCommand extends Command
+    {
+        override public function execute():void
+        {
+            dispatch( new Event( Event.COMPLETE ));
+        }
+    }
+}
+</code></pre>
+
+<p>You’ll notice it’s a pretty simple <strong>Robotlegs</strong> Command, that simply dispatches a Event.COMPLETE when executed.</p>
+
+<p>Important point to note, is it uses <strong>Robotleg’s</strong> eventDispatcher shortcut ‘dispatch’, rather than the inherant IEventDispatcher’s dispatcheEvent method. I’ll come back to this in a moment.</p>
+
+<p>Now let’s look at the mock implementation that was driving me spare!</p>
+
+<pre><code class="language-javascript">package  
+{
+    public class ExampleCommand extends Command
+    {
+        [Rule]
+        public var mockolate:MockolateRule = new MockolateRule();
+
+        [Mock( type="partial" )]
+        public var instance:ExampleCommad;
+
+        [Before]
+        public function setUp():void
+        {
+            instance.eventDispatcher = new EventDispatcher();
+        }
+
+        [Test]
+        public function executeCommand_dispatchesComplete():void
+        {
+            instance.execute();
+
+            Async.proceedOnEvent( this, instance.eventDispatcher, Event.COMPLETE );
+        }
+    }
+}
+</code></pre>
+
+<p>If we look at the shortcut method in <strong>Robotleg's</strong> Command class, the title of this post will become a little clearer…</p>
+
+<pre><code class="language-javascript">package org.robotlegs.mvcs  
+{
+  public class Command
+  {
+      /**
+      * Dispatch helper method
+      *
+      * @param event The `Event` to dispatch on the `IContext`'s `IEventDispatcher`
+      */
+      protected function dispatch(event:Event):Boolean
+      {
+          if(eventDispatcher.hasEventListener(event.type))
+              return eventDispatcher.dispatchEvent(event);
+          return false;
+      }
+  }
+}
+</code></pre>
+
+<p>The method does exactly what it’s supposed to, but also decides to go a one step further. If there are no listeners subscribed to the IEventDispatcher, why bother dispatching at all? Little point i agree!</p>
+
+<p>Except that some of us, less experienced with mocking libraries, such as <strong>Mockolate</strong>, this conflicts with the order I understood one’s mocking declarations should take.</p>
+
+<p>By looking at the following example, first you should set up your expectation, by mocking/stubbing the requirements you want ( expect ). Then the actual code is invoke – in our case the execute method called on the instance. And finally following this, our assertions that what we expected to happen, actually did/did not happen.</p>
+
+<pre><code class="language-javascript">[Test]
+public function someTestMethod_beingTested():void  
+{
+     mock( someClass ).method( "someMethod" ).args( 1, 2, 3 ).returns( false );
+     mock( someOtherClass ).getter( "enabled" ).args( true );
+
+     instance.execute();
+
+     assertThat( someClass, receieved().method( "someMethod" ).returns( false ) );
+     assertNull( someNullObject );
+
+     Async.proceedOnEvent( this, instance.eventDispatcher, Event.COMPLETE );
+}
+</code></pre>
+
+<p>One would assume that asserting that an event was dispatched as per our expectations, should happen in the same block as the other assertions. But this isn’t the case. Looking back to the <strong>Robotlegs</strong> dispatch shortcut in Command, you’ll see that because the event wasn’t registered before the command was executed, nothing was dispatched at all!</p>
+
+<p>I think looking at the code a little more clearly some times can avoid these sort of issues. The following line …</p>
+
+<pre><code class="language-javascript">Async.proceedOnEvent( this, instance.eventDispatcher, Event.COMPLETE );  
+</code></pre>
+
+<p>… actually isn’t an assertion at all. It’s the registering of an event listener to subscribe to events from the eventDispatcher specified. Pure and simple. The actual assertion, is the Async process that occurs when a matching event is dispatched.</p>
+
+<p>When considering it in this way, it’s clear as day, that as basically an ‘addEventListener’, this needs to be done BEFORE the command is executed, or of course the event is never going to be caught!</p>
+                </section>
+                <div class="share_tags">
+                    <div class="share">
+                        <h5>Share this post</h5>
+                        <div class="icons">
+                            <a class="twitter" href="https://twitter.com/share?text=Capturing%20Async%20Events%20from%20your%20Mocks%20using%20FlexUnit%2C%20Mockolate%20and%20Robotlegs&amp;url=http://localhost:2368/capturing-async-events-from-your-mocks-using-flexunit-mockolate-and-robotlegs/" target="_blank">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/capturing-async-events-from-your-mocks-using-flexunit-mockolate-and-robotlegs/" target="_blank">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a class="google-plus" href="https://plus.google.com/share?url=http://localhost:2368/capturing-async-events-from-your-mocks-using-flexunit-mockolate-and-robotlegs/" target="_blank">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="author"><figure class="avatar">
+                        <img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill">
+                    </figure><div class="info">
+                        <h3 class="name"><a href="http://localhost:2368/author/james/">James Hill</a></h3>
+                        <p class="more">Ver <a href="http://localhost:2368/author/james/">articles</a></p>
+                    </div>
+                </div>
+            </article>
+            <div class="postx">
+                <a href="http://localhost:2368/apache-flex-incubating-logo-contest-complete/">Apache Flex (Incubating) Logo Contest Complete</a>
+
+                <a href="../cufon-font-replacement/">Cufon Font Replacement</a>
+            </div>
+
+            <div id="disqus_thread"></div>
+<script src="../assets/js/comments_disqus.min.js?v=e3bde5a47e"></script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>    
+        </div><aside>
+	<a href="https://gum.co/PbYZo" target="_blank" style="background: #4794DD;border-radius: 2px;width: 100%;display: inline-block;text-align: center;color: white;padding: .5em;margin-bottom: .75em;">Contact me</a>
+	<div class="about">
+		<h4 class="title">About TiltBlog</h4>
+		<p class="blog-description">Frontend Technology Ramblings
+	</p></div>
+	<div class="social">
+				</div>
+	<div class="twitter">
+
+
+	</div>
+		<footer>
+		<p>Proudly developed whit <a href="http://ghost.org" target="_blank">Ghost</a> by <a href="http://gulp.dev" target="_blank">Ghostbuzter.com</a></p>
+	</footer>
+</aside>
+
+    </div>
+</main>
+
+
+	
+	<!-- You can safely delete this line if your theme does not require jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="../assets/js/all.min.js?v=e3bde5a47e"></script>
+
+	<script src="../assets/js/count_disqus.min.js?v=e3bde5a47e"></script>
+</body>

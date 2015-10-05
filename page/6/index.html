@@ -1,0 +1,242 @@
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>TiltBlog - Page 6</title>
+	<meta name="description," content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+
+	<link rel="shortcut icon" href="http://localhost:2368/assets/favicon.png?v=e3bde5a47e">
+
+	<link rel="stylesheet" href="../../assets/css/all.min.css?v=e3bde5a47e">
+	<link rel="stylesheet" media="(max-width: 699px)" href="../../assets/css/jass_mob.min.css?v=e3bde5a47e">
+	<link rel="stylesheet" media="(min-width: 700px)" href="../../assets/css/jass_des.min.css?v=e3bde5a47e">
+
+	<meta name="twitter:widgets:theme" content="light">
+	<meta name="twitter:widgets:link-color" content="#2E8CDA">
+	<meta name="twitter:widgets:border-color" content="#E8E8E8">
+	<link rel="canonical" href="index.html">
+    <meta name="referrer" content="origin">
+    <link rel="prev" href="../5/index.html">
+    <link rel="next" href="http://localhost:2368/page/7/">
+    <meta name="generator" content="Ghost 0.7">
+    <link rel="alternate" type="application/rss+xml" title="TiltBlog" href="../../rss/index.html">
+</head>
+<body class="paged archive-template">
+	<header>
+	<div class="wrapper">
+
+		<div id="logo">
+			<a href="../../">TiltBlog</a>
+		</div><nav>
+		<ul class="nav">
+		    <li class="nav-home"><a href="../../">Home</a></li>
+		</ul>
+</nav>
+
+		
+		<div class="mobile_social">
+			<h5>Follow me</h5>
+			<div class="icons">
+				<h4>Follow me</h4>
+<div class="icons">
+  <section class="blog--social"><div class="icons">
+
+      <a class="icons--icon icon" target="_blank" href="http://facebook.com/nike" title="facebook">
+          <i class="fa fa-facebook"></i>
+      </a>
+
+    <a href="http://localhost:2368/page/6/url_of_your_perfil" class="icons--icon icon" title="" target="_blank">
+      <i class="fa fa-twitch"></i>
+    </a>
+
+
+  </div></section>
+</div>
+			</div>
+			<small class="copy">creado con ghost por <a href="http://gulp.dev">ghosbuzter</a></small>
+		</div>
+	</div>
+</header>
+
+	
+<div class="content">
+	<div class="wrapper">
+		<div class="posts">
+			<article class="post">
+	<div class="avatar_title" id="aritcle-49">
+		<h1 class="title">
+			<a href="http://localhost:2368/apache-flex-incubating-logo-contest-complete/">Apache Flex (Incubating) Logo Contest Complete</a>
+		</h1>
+
+	</div>
+	<section>
+			<p></p><div style="float: left; padding-right: 20px">  
+    <img src="http://flex.apache.org/images/logo_01_fullcolor-sm.png" alt="Your alt text" title="Title">
+</div>
+
+<p>Is strange seeing <a href="http://www.adobe.com/products/flex.html">Adobe Flex</a> now incubated into the <a href="http://incubator.apache.org/flex/">Apache project</a>, but that’s evolution I guess.</p>
+
+<p>One thing that I have to congratulate though, is the new Flex logo chosen by the team at Apache, as designed by Adrian Knopik from <a href="http://fusecollective.com/">Fuse Collective</a>.</p>
+
+<p>I think the design is superb and really gives a sense of the evolution of Flex, as a community project that will continue to be a pioneering web application framework. All this talk of HTM5 taking over the world, maybe true enough in some circles, but I don’t think Apache Flex isn’t going anywhere just yet!</p>
+	</section>
+	<div class="author_read">
+		<div class="author">
+				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
+				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
+			<time class="post-date" datetime="2011-02-21"><i class="fa fa-clock-o"></i> 21 Feb, 2011</time>
+			<a class="disqus_comment" href="http://localhost:2368/apache-flex-incubating-logo-contest-complete/#disqus_thread"></a>
+		</div>
+		<p class="read_more">
+			<a href="http://localhost:2368/apache-flex-incubating-logo-contest-complete/">read more</a>
+		</p>
+	</div>
+</article>
+<article class="post">
+	<div class="avatar_title" id="aritcle-50">
+		<h1 class="title">
+			<a href="http://localhost:2368/adobe-air-adt-error-could-not-generate-timestamp-unrecognized-ssl-message-plaintext-connection/">Adobe Air ADT Error :: Could not generate timestamp: Unrecognized SSL message, plaintext connection?</a>
+		</h1>
+
+	</div>
+	<section>
+			<p></p><p>This one had me scratching my head for quite flippin’ ages!</p>
+
+<p>As with a lot of continuous integration and other automated build systems, ANT is used pretty heavily to script our different consolidation, compilation and deployment tasks. The particular module that threw the above error was an Adobe AIR 3.1 Desktop application that had previously compiled and packaged with no problem.</p>
+
+<h2 id="thesolution">The Solution  </h2>
+
+<p>Upon further investigation, it seems that ADT ( Air developer tool ) has an optional parameter tsa which specifies a URL of an RFC3161-compliant timestamp server to time-stamp the digital signature. The following is from <a href="http://help.adobe.com/en_US/air/build/WS5b3ccc516d4fbf351e63e3d118666ade46-7f72.html">Adobe’s ADT code signing options</a> page…</p>
+
+<p>[quote]Specifies the URL of an RFC3161-compliant timestamp server to time-stamp the digital signature. If no URL is specified, a default time-stamp server provided by Geotrust is used. When the signature of an AIR application is time-stamped, the application can still be installed after the signing certificate expires, because the timestamp verifies that the certificate was valid at the time of signing.</p>
+
+<p>If ADT cannot connect to the time-stamp server, then signing is canceled and no package is produced. Specify -tsa none to disable time-stamping. However, an AIR application packaged without a timestamp ceases to be</p>
+	</section>
+	<div class="author_read">
+		<div class="author">
+				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
+				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
+			<time class="post-date" datetime="2011-02-15"><i class="fa fa-clock-o"></i> 15 Feb, 2011</time>
+			<a class="disqus_comment" href="http://localhost:2368/adobe-air-adt-error-could-not-generate-timestamp-unrecognized-ssl-message-plaintext-connection/#disqus_thread"></a>
+		</div>
+		<p class="read_more">
+			<a href="http://localhost:2368/adobe-air-adt-error-could-not-generate-timestamp-unrecognized-ssl-message-plaintext-connection/">read more</a>
+		</p>
+	</div>
+</article>
+<article class="post">
+	<div class="avatar_title" id="aritcle-37">
+		<h1 class="title">
+			<a href="http://localhost:2368/temp-slug-36/">Flash Builder Debugger + Apache ANT</a>
+		</h1>
+
+	</div>
+	<section>
+			<p></p><p>I guess this topic has been blogged a thousand times, but even with a number of year’s worth of experience using <a href="http://ant.apache.org">Apache ANT</a>, I’ve never successfully got Debug output in the <strong>Flex / Flash Builder</strong> Console window. Obvious, the debugging console in Flex, is fundamental to developing applications, so having finally found the solution, I thought I’d document it here.</p>
+
+<p>By going into your project properties in <strong>Flash Builder</strong> and selecting the ‘Builders’ tab, you’ll see a list of the different, er.. Builders that you can use to er…. build your application. By default, you’ll probably only see the ‘Flex’ builder in there. But by clicking add, and selecting ‘Ant Builder’ you’ll now have the capacity to build with ANT, and debug in your console. Well, not quite as simple as that. I tried this on numerous occasions with Flex Builder, but to no avail. It simply would never work. Have only recently tried again with Flex’s latest incarnation – Flash Builder 4 – and it now miraculously works!</p>
+
+<p>I may well be that my <strong>ANT</strong> scripts have evolved somewhat since last trying, but it really is a simple process now. Just edit the new Ant</p>
+	</section>
+	<div class="author_read">
+		<div class="author">
+				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
+				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
+			<time class="post-date" datetime="2010-10-15"><i class="fa fa-clock-o"></i> 15 Oct, 2010</time>
+			<a class="disqus_comment" href="http://localhost:2368/temp-slug-36/#disqus_thread"></a>
+		</div>
+		<p class="read_more">
+			<a href="http://localhost:2368/temp-slug-36/">read more</a>
+		</p>
+	</div>
+</article>
+<article class="post tag-ant tag-dependancy-injection tag-metadat tag-parsley tag-robotlegs">
+	<div class="avatar_title" id="aritcle-36">
+		<h1 class="title">
+			<a href="http://localhost:2368/robotlegs-dependancy-injection-frameworks-ant/">Robotlegs / Dependancy Injection frameworks + ANT</a>
+		</h1>
+
+	</div>
+	<section>
+			<p></p><p>I’ve been playing around with DI / IoC frameworks for a while now, but new territory for me is building them with ANT.Â  <a href="http://ant.apache.org/" title="Apache ANT">Apache ANT</a> is an old favourite tool of mine, but was only recently that a multi-modular application required ANTing!</p>
+
+<p>I couldn’t understand why after an apparently successful compilation, the application just wouldn’t work.Â  I thought I’d save someone the googling I’ve done to try and find the answer and post it here.</p>
+
+<p>By default metadata is stripped out at compile time, when using ANT unless you specify otherwise.Â  Check your flex-config.xml and you’ll notice ‘keep-as3-metadata’ is commented out.Â  Simply uncomment and include the metadata you want including.Â  The following example with enable all the usual metadata tags for <a href="http://www.robotlegs.org/" title="Robotlegs">RobotLegs</a>.</p>
+
+<p><keep><name>Bindable</name><name>Managed</name><name>ChangeEvent</name><name>NonCommittingChangeEvent</name><name>Transient</name><name>Inject</name><name>PostConstruct</name></keep></p>
+	</section>
+	<div class="author_read">
+		<div class="author">
+				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
+				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
+			<time class="post-date" datetime="2010-10-12"><i class="fa fa-clock-o"></i> 12 Oct, 2010</time>
+			<a class="disqus_comment" href="http://localhost:2368/robotlegs-dependancy-injection-frameworks-ant/#disqus_thread"></a>
+		</div>
+		<p class="read_more">
+			<a href="http://localhost:2368/robotlegs-dependancy-injection-frameworks-ant/">read more</a>
+		</p>
+	</div>
+</article>
+<article class="post tag-flash-builder tag-flex-4 tag-flex-ant-eclipse">
+	<div class="avatar_title" id="aritcle-35">
+		<h1 class="title">
+			<a href="http://localhost:2368/flash-builder-mylyn-ultimate-productivity/">Flash Builder + Mylyn = Ultimate Productivity!</a>
+		</h1>
+
+	</div>
+	<section>
+			<p></p><p>I’m going to describe here how to install Mylyn into your Flash Builder development environment. Mylyn is the task and application lifecycle management (ALM) framework, that reduces information overload and makes multitasking easy. You can easily hook it up to your Bug, Issue and Project tracking software using it’s in built connectors, such as Jira, Bugzilla, Trac, Google Code etc.</p>
+
+<p>Once connected to your issue tracker of choice, open the Tasks view or your Planning perspective and you’ll see a lovely list of everything logged in your issue tracker ( let’s say Bugzilla from now on! ). It now lets you do all the things you can do in Bugzilla, but right inside Flash Builder, which really simplifies your workflow.</p>
+
+<p>One of my favourite aspects is the Svn client adapter. When activating a specific Task, any files you open relating to that task are marked in the tasks context. This means, when ever you open that task again, it will automatically open those files for you! How cool! And when you mark the task as resolved and goto commit the files back to svn, it automatically fills the svn comments for you with the details from the task.</p>
+	</section>
+	<div class="author_read">
+		<div class="author">
+				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
+				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
+			<time class="post-date" datetime="2010-10-11"><i class="fa fa-clock-o"></i> 11 Oct, 2010</time>
+			<a class="disqus_comment" href="http://localhost:2368/flash-builder-mylyn-ultimate-productivity/#disqus_thread"></a>
+		</div>
+		<p class="read_more">
+			<a href="http://localhost:2368/flash-builder-mylyn-ultimate-productivity/">read more</a>
+		</p>
+	</div>
+</article>
+<nav role="pagination" class="pagination">
+    <a href="../5/" class="prev" data-pjax>New Posts</a>
+    <a href="http://localhost:2368/page/7/" class="next" data-pjax>Older Posts</a>
+</nav>
+
+		</div><aside>
+	<a href="https://gum.co/PbYZo" target="_blank" style="background: #4794DD;border-radius: 2px;width: 100%;display: inline-block;text-align: center;color: white;padding: .5em;margin-bottom: .75em;">Contact me</a>
+	<div class="about">
+		<h4 class="title">About TiltBlog</h4>
+		<p class="blog-description">Frontend Technology Ramblings
+	</p></div>
+	<div class="social">
+				</div>
+	<div class="twitter">
+
+
+	</div>
+		<footer>
+		<p>Proudly developed whit <a href="http://ghost.org" target="_blank">Ghost</a> by <a href="http://gulp.dev" target="_blank">Ghostbuzter.com</a></p>
+	</footer>
+</aside>
+
+	</div>
+</div>
+
+
+	
+	<!-- You can safely delete this line if your theme does not require jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="../../assets/js/all.min.js?v=e3bde5a47e"></script>
+
+	<script src="../../assets/js/count_disqus.min.js?v=e3bde5a47e"></script>
+</body>

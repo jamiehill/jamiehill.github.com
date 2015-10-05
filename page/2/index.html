@@ -1,0 +1,301 @@
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>TiltBlog - Page 2</title>
+	<meta name="description," content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+
+	<link rel="shortcut icon" href="http://localhost:2368/assets/favicon.png?v=e3bde5a47e">
+
+	<link rel="stylesheet" href="../../assets/css/all.min.css?v=e3bde5a47e">
+	<link rel="stylesheet" media="(max-width: 699px)" href="../../assets/css/jass_mob.min.css?v=e3bde5a47e">
+	<link rel="stylesheet" media="(min-width: 700px)" href="../../assets/css/jass_des.min.css?v=e3bde5a47e">
+
+	<meta name="twitter:widgets:theme" content="light">
+	<meta name="twitter:widgets:link-color" content="#2E8CDA">
+	<meta name="twitter:widgets:border-color" content="#E8E8E8">
+	<link rel="canonical" href="index.html">
+    <meta name="referrer" content="origin">
+    <link rel="prev" href="../../index.html">
+    <link rel="next" href="../3/index.html">
+    <meta name="generator" content="Ghost 0.7">
+    <link rel="alternate" type="application/rss+xml" title="TiltBlog" href="../../rss/index.html">
+</head>
+<body class="paged archive-template">
+	<header>
+	<div class="wrapper">
+
+		<div id="logo">
+			<a href="../../">TiltBlog</a>
+		</div><nav>
+		<ul class="nav">
+		    <li class="nav-home"><a href="../../">Home</a></li>
+		</ul>
+</nav>
+
+		
+		<div class="mobile_social">
+			<h5>Follow me</h5>
+			<div class="icons">
+				<h4>Follow me</h4>
+<div class="icons">
+  <section class="blog--social"><div class="icons">
+
+      <a class="icons--icon icon" target="_blank" href="http://facebook.com/nike" title="facebook">
+          <i class="fa fa-facebook"></i>
+      </a>
+
+    <a href="http://localhost:2368/page/2/url_of_your_perfil" class="icons--icon icon" title="" target="_blank">
+      <i class="fa fa-twitch"></i>
+    </a>
+
+
+  </div></section>
+</div>
+			</div>
+			<small class="copy">creado con ghost por <a href="http://gulp.dev">ghosbuzter</a></small>
+		</div>
+	</div>
+</header>
+
+	
+<div class="content">
+	<div class="wrapper">
+		<div class="posts">
+			<article class="post">
+	<div class="avatar_title" id="aritcle-42">
+		<h1 class="title">
+			<a href="../../adding-multiple-assets-to-your-swc-using-apache-ant-and-adobe-flex-component-compiler-compc/">Adding Multiple Assets To Your Swc Using Apache ANT And Adobe Flex Component Compiler (Compc)</a>
+		</h1>
+
+	</div>
+	<section>
+			<p></p><p>This is a topic I felt I should cover, as after many hours spent Googling, I still haven’t found a viable solution, and neither does it seem, have scores of other Flex Developers.</p>
+
+<p>If you need to package an arbitary set of asset files in a swc, the process is not only laborious, but actually unworkable. The Compc Ant task, provides the ‘include-file’ property, that lets you explicitly tell the compiler, that that file should be included in the resultant swc. On large scale enterprise applications – that may contain hundreds of asset files – there is no way of dynamically including the contents of a certain folder.</p>
+
+<pre><code class="language-python">&lt;include-file name="an_image.png" value="path/to/image/folder/an_image.png"/&gt;  
+</code></pre>
+
+<p>After scratching my head for a considerable time, extending Compc and adding an easier mechanism to do this, seemed like the only option. So here it is – Compcx (CompcExtended).</p>
+	</section>
+	<div class="author_read">
+		<div class="author">
+				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
+				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
+			<time class="post-date" datetime="2013-04-16"><i class="fa fa-clock-o"></i> 16 Apr, 2013</time>
+			<a class="disqus_comment" href="../../adding-multiple-assets-to-your-swc-using-apache-ant-and-adobe-flex-component-compiler-compc/index.html#disqus_thread"></a>
+		</div>
+		<p class="read_more">
+			<a href="../../adding-multiple-assets-to-your-swc-using-apache-ant-and-adobe-flex-component-compiler-compc/">read more</a>
+		</p>
+	</div>
+</article>
+<article class="post">
+	<div class="avatar_title" id="aritcle-43">
+		<h1 class="title">
+			<a href="../../globalremoteobjectfaulthandler-global-error-handler-for-parsley-3/">GlobalRemoteObjectFaultHandler Global Error Handler For Parsley 3</a>
+		</h1>
+
+	</div>
+	<section>
+			<p></p><p>Further to my <a href="http://blog.tiltdigital.com/adobe/globalremoteobjectfaulthandler-woes/">previous post</a>, I still couldn’t get the GlobalRemoteObjectFaultHandler Metadata tag to capture application exceptions being thrown globally. And the reason became perfectly clear upon studying the <a href="http://sourceforge.net/adobe/cairngorm/code/843/tree/cairngorm3/trunk/libraries/IntegrationParsley/">Cairngorm Parsley Integration</a> code.</p>
+
+<p>Seems the Cairngorm code base is still stuck pre-Parsley 3, almost a year and a half after it’s release.</p>
+
+<p>Solution – Write the thing myself. Spent some time Googling for a solution, so I hope this might be useful to someone.</p>
+
+<p>The functionality is encapsulated by two classes, and the extension initialised in a third. I’ve renamed the extension GlobalServiceFault – to keep a differentiation from the original. You can find the original ‘GlobalRemnoteObjectFaultHandler’ code here.</p>
+
+<pre><code class="language-javascript">package  
+{
+  import mx.rpc.events.FaultEvent;
+
+  import org.spicefactory.parsley.core.builder.ObjectDefinitionBuilder;
+  import org.spicefactory.parsley.core.builder.ObjectDefinitionDecorator;
+  import org.spicefactory.parsley.core.scope.ScopeName;
+  import org.spicefactory.parsley.messaging.MessageHandler;
+
+  [Metadata(types="method")]
+  public class GlobalServiceFault implements ObjectDefinitionDecorator
+  {
+      [Target]
+      public var method:String;
+
+      private var proxyRegistered:Boolean = false;
+
+      public var scope:String = ScopeName.GLOBAL;
+
+      public function decorate(builder:ObjectDefinitionBuilder):void
+      {
+          if (!proxyRegistered)
+          {
+              proxyRegistered = true;
+              builder
+                  .registry
+                      .builders
+                      .forClass(GlobalServiceFaultProcessor)
+                      .asSingleton()
+                      .register();
+          }
+
+          MessageHandler
+              .forMethod(method)
+                  .type(FaultEvent)
+                  .scope(scope)
+                  .selector(GlobalServiceFaultProcessor.messageSelector)
+                      .apply(builder);
+      }
+  }
+}
+</code></pre>
+
+<p>And the ObjectProcessor …  </p>
+
+<pre><code>package</code></pre>
+	</section>
+	<div class="author_read">
+		<div class="author">
+				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
+				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
+			<time class="post-date" datetime="2012-12-14"><i class="fa fa-clock-o"></i> 14 Dec, 2012</time>
+			<a class="disqus_comment" href="../../globalremoteobjectfaulthandler-global-error-handler-for-parsley-3/index.html#disqus_thread"></a>
+		</div>
+		<p class="read_more">
+			<a href="../../globalremoteobjectfaulthandler-global-error-handler-for-parsley-3/">read more</a>
+		</p>
+	</div>
+</article>
+<article class="post">
+	<div class="avatar_title" id="aritcle-44">
+		<h1 class="title">
+			<a href="../../globalremoteobjectfaulthandler-woes/">GlobalRemoteObjectFaultHandler woes</a>
+		</h1>
+
+	</div>
+	<section>
+			<p></p><p>Honestly, the trouble I’ve had trying to get Parsley’s <strong>GlobalRemoteObjectFaultHandler</strong> working, you wouldn’t believe. The documentation on the Spicefactory site is blessedly comprehensive (well at least to a certain level), but it can be frustrating trying to find specific use-case examples when the documentation falls short. (Sorry Jens, criticism is not my intention!).</p>
+
+<p>Fortunately, <a href="http://ensharable.wordpress.com/2010/08/23/globalremoteobjectfaulthandler/">this post</a> saved my bacon.</p>
+
+<p>I had done just that – adding the CairngormIntegrationSupport tag to the ContextBuilder, but my downfail was the cairngorm namespace declaration being used.  I’d previously had <a href="http://sourceforge.net/adobe/cairngorm/wiki/HowToUseCairngormPopup/">Cairngorm Popup Library</a> functionality imported, that had automatically added the following namespace for Cairngorm:</p>
+
+<blockquote>
+  <p><a href="http://ns.adobe.com/cairngorm">http://ns.adobe.com/cairngorm</a></p>
+</blockquote>
+
+<p>But as the post above describes, to get the Cairngorm integration working, the Cairngorm namespace required is:</p>
+
+<blockquote>
+  <p>com.adobe.cairngorm.*</p>
+</blockquote>
+
+<p>Thanks Adobe for suffering me hours of head scratching!</p>
+	</section>
+	<div class="author_read">
+		<div class="author">
+				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
+				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
+			<time class="post-date" datetime="2012-12-14"><i class="fa fa-clock-o"></i> 14 Dec, 2012</time>
+			<a class="disqus_comment" href="../../globalremoteobjectfaulthandler-woes/index.html#disqus_thread"></a>
+		</div>
+		<p class="read_more">
+			<a href="../../globalremoteobjectfaulthandler-woes/">read more</a>
+		</p>
+	</div>
+</article>
+<article class="post">
+	<div class="avatar_title" id="aritcle-45">
+		<h1 class="title">
+			<a href="../../explicitly-adding-linebreaks-to-spark-labels/">Explicitly Adding LineBreaks to Spark Labels</a>
+		</h1>
+
+	</div>
+	<section>
+			<p></p><p>Just a quick one, primarily for my memory’s – or lack there of – benefit.</p>
+
+<p>When trying to explicitly break some text across multiple lines, in Spark components that don’t natively use html text, such as Label, trying to break the line with \n never seems to work.</p>
+
+<p>By wrapping it in parenthesis – {‘\n’} – we can achieve the desired result:</p>
+
+<pre><code>// results in ...
+The quick brown fox  
+jumps over the lazy dog  
+</code></pre>
+	</section>
+	<div class="author_read">
+		<div class="author">
+				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
+				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
+			<time class="post-date" datetime="2012-05-29"><i class="fa fa-clock-o"></i> 29 May, 2012</time>
+			<a class="disqus_comment" href="../../explicitly-adding-linebreaks-to-spark-labels/index.html#disqus_thread"></a>
+		</div>
+		<p class="read_more">
+			<a href="../../explicitly-adding-linebreaks-to-spark-labels/">read more</a>
+		</p>
+	</div>
+</article>
+<article class="post">
+	<div class="avatar_title" id="aritcle-46">
+		<h1 class="title">
+			<a href="../../happy-78th-birthday-robert-moog/">Happy 78th Birthday Robert Moog!</a>
+		</h1>
+
+	</div>
+	<section>
+			<p></p><p>I have to say, I’ve always been a fan of <strong>Google’s Doodles</strong>, but was amazed to see todays Google Doodle – a tribute to the the Synth Father himself, <a href="http://www.google.com/doodles/robert-moogs-78th-birthday">Dr Robert Moog</a>.</p>
+
+<p>The actual Google Doogle is a fully playable Mini Moog ( well sort of fully playable! ).</p>
+
+<p>Much like the musical machines <strong>Bob Moog</strong> created, this doodle was synthesized from a number of smaller components to form a unique instrument. When experienced with Google Chrome, sound is generated natively using the <a href="http://www.html5rocks.com/en/tutorials/webaudio/intro/">Web Audio API</a> —a doodle first (for other browsers the Flash plugin is used). This doodle also takes advantage of <strong>JavaScript</strong>, <strong>Closure libraries</strong>, <strong>CSS3</strong> and tools like <strong>Google Web Fonts</strong>, the <strong>Google+ API</strong>, the <strong>Google URL Shortener</strong> and <strong>App Engine</strong>,</p>
+
+<p><a href="http://www.google.com/doodles/robert-moogs-78th-birthday">Check it out!</a></p>
+	</section>
+	<div class="author_read">
+		<div class="author">
+				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
+				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
+			<time class="post-date" datetime="2012-05-23"><i class="fa fa-clock-o"></i> 23 May, 2012</time>
+			<a class="disqus_comment" href="../../happy-78th-birthday-robert-moog/index.html#disqus_thread"></a>
+		</div>
+		<p class="read_more">
+			<a href="../../happy-78th-birthday-robert-moog/">read more</a>
+		</p>
+	</div>
+</article>
+<nav role="pagination" class="pagination">
+    <a href="../../" class="prev" data-pjax>New Posts</a>
+    <a href="../3/" class="next" data-pjax>Older Posts</a>
+</nav>
+
+		</div><aside>
+	<a href="https://gum.co/PbYZo" target="_blank" style="background: #4794DD;border-radius: 2px;width: 100%;display: inline-block;text-align: center;color: white;padding: .5em;margin-bottom: .75em;">Contact me</a>
+	<div class="about">
+		<h4 class="title">About TiltBlog</h4>
+		<p class="blog-description">Frontend Technology Ramblings
+	</p></div>
+	<div class="social">
+				</div>
+	<div class="twitter">
+
+
+	</div>
+		<footer>
+		<p>Proudly developed whit <a href="http://ghost.org" target="_blank">Ghost</a> by <a href="http://gulp.dev" target="_blank">Ghostbuzter.com</a></p>
+	</footer>
+</aside>
+
+	</div>
+</div>
+
+
+	
+	<!-- You can safely delete this line if your theme does not require jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="../../assets/js/all.min.js?v=e3bde5a47e"></script>
+
+	<script src="../../assets/js/count_disqus.min.js?v=e3bde5a47e"></script>
+</body>
