@@ -1,0 +1,18 @@
+jspm_packages/
+node_modules/
+npm-debug.log
+modules/
+vendor/
+dist/
+build/
+.DS_Store
+.tmp
+_tmp
+app/.sass-cache
+styles.css
+
+# ignore .idea folder but not run configurations
+.idea/*
+!.idea/runConfiguration/
+app/css/styles.css
+
