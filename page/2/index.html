@@ -8,11 +8,11 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
 
-	<link rel="shortcut icon" href="http://localhost:2368/assets/favicon.png?v=ce1bc11edb">
+	<link rel="shortcut icon" href="http://localhost:2368/assets/favicon.png?v=53bb446100">
 
-	<link rel="stylesheet" href="../../assets/css/all.min.css?v=ce1bc11edb">
-	<link rel="stylesheet" media="(max-width: 699px)" href="../../assets/css/jass_mob.min.css?v=ce1bc11edb">
-	<link rel="stylesheet" media="(min-width: 700px)" href="../../assets/css/jass_des.min.css?v=ce1bc11edb">
+	<link rel="stylesheet" href="../../assets/css/all.min.css?v=53bb446100">
+	<link rel="stylesheet" media="(max-width: 699px)" href="../../assets/css/jass_mob.min.css?v=53bb446100">
+	<link rel="stylesheet" media="(min-width: 700px)" href="../../assets/css/jass_des.min.css?v=53bb446100">
 
 	<meta name="twitter:widgets:theme" content="light">
 	<meta name="twitter:widgets:link-color" content="#2E8CDA">
@@ -65,6 +65,67 @@
 	<div class="wrapper">
 		<div class="posts">
 			<article class="post">
+	<div class="avatar_title" id="aritcle-41">
+		<h1 class="title">
+			<a href="../../routing-overloaded-controller-actions-in-play-framework-2/">Routing Overloaded Controller Actions in Play Framework 2</a>
+		</h1>
+
+	</div>
+	<section>
+			<p></p><p>Came across an interesting dilema whilst trying to wire up a tree control using Play Framework 2.</p>
+
+<p>The controls api only provides one method for retrieval of initial remote data and also subsequent loading of on-demand data for updating the control. So, how to wrap two remote requests using the same controller action? Overload the controller method! Er … not quite that simple …!</p>
+
+<p>In Play, you can’t – for obvious reasons – map the same url to different actions. This still applies to overloaded methods, as the framework still sees them as two separate methods, not simply two versions of the same thing!</p>
+
+<pre><code class="language-bash"># Routes
+GET      /getData      controllers.Application.getData()  
+GET      /getData      controllers.Application.getData(nodeId)  
+</code></pre>
+
+<pre><code class="language-bash">#Controller
+public static Result getData() {  
+    // load initial remote data to populate the control
+}
+
+public static Result getData(String nodeId) {  
+    // load on-demand data to update control
+}
+</code></pre>
+
+<p>language-bash
+This is fortunately, easy to work around, by providing default parameters to a controller method, that can then decide which data it should load …  </p>
+
+<pre><code># Routes
+GET      /getData      controllers.Application.getData(id:String ?= "root")  
+</code></pre>
+
+<pre><code class="language-bash">#Controller
+public static Result getData(String id) {  
+    if (id == "root")
+        return loadRootNodes();
+    return loadNode(id);
+}
+
+public static Result loadRootNodes() {  
+    // load initial remote data to populate the control
+}
+
+public</code></pre>
+	</section>
+	<div class="author_read">
+		<div class="author">
+				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
+				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
+			<time class="post-date" datetime="2013-09-02"><i class="fa fa-clock-o"></i> 2 Sep, 2013</time>
+			<a class="disqus_comment" href="../../routing-overloaded-controller-actions-in-play-framework-2/index.html#disqus_thread"></a>
+		</div>
+		<p class="read_more">
+			<a href="../../routing-overloaded-controller-actions-in-play-framework-2/">read more</a>
+		</p>
+	</div>
+</article>
+<article class="post">
 	<div class="avatar_title" id="aritcle-42">
 		<h1 class="title">
 			<a href="../../adding-multiple-assets-to-your-swc-using-apache-ant-and-adobe-flex-component-compiler-compc/">Adding Multiple Assets To Your Swc Using Apache ANT And Adobe Flex Component Compiler (Compc)</a>
@@ -237,34 +298,6 @@ jumps over the lazy dog
 		</p>
 	</div>
 </article>
-<article class="post">
-	<div class="avatar_title" id="aritcle-46">
-		<h1 class="title">
-			<a href="../../happy-78th-birthday-robert-moog/">Happy 78th Birthday Robert Moog!</a>
-		</h1>
-
-	</div>
-	<section>
-			<p></p><p>I have to say, I’ve always been a fan of <strong>Google’s Doodles</strong>, but was amazed to see todays Google Doodle – a tribute to the the Synth Father himself, <a href="http://www.google.com/doodles/robert-moogs-78th-birthday">Dr Robert Moog</a>.</p>
-
-<p>The actual Google Doogle is a fully playable Mini Moog ( well sort of fully playable! ).</p>
-
-<p>Much like the musical machines <strong>Bob Moog</strong> created, this doodle was synthesized from a number of smaller components to form a unique instrument. When experienced with Google Chrome, sound is generated natively using the <a href="http://www.html5rocks.com/en/tutorials/webaudio/intro/">Web Audio API</a> —a doodle first (for other browsers the Flash plugin is used). This doodle also takes advantage of <strong>JavaScript</strong>, <strong>Closure libraries</strong>, <strong>CSS3</strong> and tools like <strong>Google Web Fonts</strong>, the <strong>Google+ API</strong>, the <strong>Google URL Shortener</strong> and <strong>App Engine</strong>,</p>
-
-<p><a href="http://www.google.com/doodles/robert-moogs-78th-birthday">Check it out!</a></p>
-	</section>
-	<div class="author_read">
-		<div class="author">
-				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
-				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
-			<time class="post-date" datetime="2012-05-23"><i class="fa fa-clock-o"></i> 23 May, 2012</time>
-			<a class="disqus_comment" href="../../happy-78th-birthday-robert-moog/index.html#disqus_thread"></a>
-		</div>
-		<p class="read_more">
-			<a href="../../happy-78th-birthday-robert-moog/">read more</a>
-		</p>
-	</div>
-</article>
 <nav role="pagination" class="pagination">
     <a href="../../" class="prev" data-pjax>New Posts</a>
     <a href="../3/" class="next" data-pjax>Older Posts</a>
@@ -295,7 +328,7 @@ jumps over the lazy dog
 	
 	<!-- You can safely delete this line if your theme does not require jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="../../assets/js/all.min.js?v=ce1bc11edb"></script>
+	<script src="../../assets/js/all.min.js?v=53bb446100"></script>
 
-	<script src="../../assets/js/count_disqus.min.js?v=ce1bc11edb"></script>
+	<script src="../../assets/js/count_disqus.min.js?v=53bb446100"></script>
 </body>

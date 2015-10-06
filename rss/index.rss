@@ -1,4 +1,4 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>TiltBlog</title><description>Frontend Technology Ramblings</description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Tue, 06 Oct 2015 10:43:36 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Enabling Babel ES7 Features in SystemJS/JSPM</title><description>&lt;p&gt;Enabling &lt;a href="http://kangax.github.io/compat-table/es7/"&gt;ES7&lt;/a&gt; support in &lt;a href="https://github.com/systemjs/systemjs"&gt;SystemJS&lt;/a&gt;, is a pretty trivial thing to do, but took me a while to figure out how.  &lt;/p&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>TiltBlog</title><description>Frontend Technology Ramblings</description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Tue, 06 Oct 2015 15:45:59 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Enabling Babel ES7 Features in SystemJS/JSPM</title><description>&lt;p&gt;Enabling &lt;a href="http://kangax.github.io/compat-table/es7/"&gt;ES7&lt;/a&gt; support in &lt;a href="https://github.com/systemjs/systemjs"&gt;SystemJS&lt;/a&gt;, is a pretty trivial thing to do, but took me a while to figure out how.  &lt;/p&gt;
 
 &lt;p&gt;I'll cut to the chase and show you how:&lt;/p&gt;
 
@@ -134,7 +134,61 @@ AsyncRoute.defaultProps = {
   &lt;p&gt;If you specify an "engines" field, then npm will require that "node" be somewhere on that list. If "engines" is omitted, then npm will just assume that it works on node.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Suffice to say, a fairly trivial addition, but an important one, when working across large teams, on different environments.&lt;/p&gt;</content:encoded></item><item><title>Play Idea No-SBT-Build-Module With-Sources</title><description>&lt;p&gt;Just saying ... &lt;br&gt;
+&lt;p&gt;Suffice to say, a fairly trivial addition, but an important one, when working across large teams, on different environments.&lt;/p&gt;</content:encoded></item><item><title>An Array Or Not An Array;  That Is The Question!</title><description>&lt;p&gt;Static type checking is a big loss for me, having moved over to Javascript.  But not completely - it's a double edged sword.  Javascript's deficiencies ironically, can also be it's strengths!&lt;/p&gt;
+
+&lt;p&gt;With concrete type checked languages such as &lt;strong&gt;Java&lt;/strong&gt;, being able to overload functions, for different purposes is invaluable.  &lt;/p&gt;
+
+&lt;p&gt;And&lt;/p&gt;</description><link>http://localhost:2368/an-array-or-not-an-array-that-is-the-question/</link><guid isPermaLink="false">45ec52fd-b506-49d5-8515-6a4256a7abcb</guid><category>array</category><category>concat</category><category>isArray</category><dc:creator>James Hill</dc:creator><pubDate>Sat, 17 May 2014 15:44:00 GMT</pubDate><content:encoded>&lt;p&gt;Static type checking is a big loss for me, having moved over to Javascript.  But not completely - it's a double edged sword.  Javascript's deficiencies ironically, can also be it's strengths!&lt;/p&gt;
+
+&lt;p&gt;With concrete type checked languages such as &lt;strong&gt;Java&lt;/strong&gt;, being able to overload functions, for different purposes is invaluable.  &lt;/p&gt;
+
+&lt;p&gt;And with Javascript, it's easy to achieve the same.  Although additional logic is often required to deal with checking the type of the passed in arguments.&lt;/p&gt;
+
+&lt;p&gt;Which leads me onto the purpose of this post, checking if an argument is an &lt;code&gt;Array&lt;/code&gt;, and if not making it an &lt;code&gt;Array&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;There seem myriad ways of doing this, some efficient, some not.  &lt;/p&gt;
+
+&lt;h1 id="arrayisarrayarr"&gt;Array.isArray(arr)  &lt;/h1&gt;
+
+&lt;p&gt;Using Array's native method &lt;code&gt;isArray&lt;/code&gt;, is an obvious choice, when used in a ternary expression, but is a little terse.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-javascript"&gt;var array = Array.isArray(arg) ? arg : [arg];  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id="arginstanceofarray"&gt;(arg instanceof Array)&lt;/h1&gt;
+
+&lt;p&gt;Otherwise, `instanceof' can achieve the same result, but again, we have to relie on a long winded ternary expression:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-javascript"&gt;var array = arg instanceof Array ? arg : [arg];  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id="objectarray"&gt;'[object Array]'  &lt;/h1&gt;
+
+&lt;p&gt;Or if we're just being ridiculous:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-javascript"&gt;var array = Object.prototype.toString.call(arg) == '[object Array]' ? arg : [arg]  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id="andthewinneris"&gt;And the winner is ..  &lt;/h1&gt;
+
+&lt;p&gt;But I think the winner for me, both aesthetically and conceptually, is the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-javascript"&gt;var array = [].concat(arg);  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If &lt;strong&gt;arg&lt;/strong&gt; is an &lt;strong&gt;Array&lt;/strong&gt;, it's values are inserted into the new &lt;strong&gt;Array&lt;/strong&gt;.  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var array = [].concat([1,2,3])  
+console.log(array.toString()); // 1, 2, 3  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If &lt;strong&gt;arg&lt;/strong&gt; isn't an &lt;strong&gt;Array&lt;/strong&gt;, it's inserted defacto into the new &lt;strong&gt;Array&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var array = [].concat(1);  
+console.log(array.toString()) // 1  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Short and concise.&lt;/p&gt;</content:encoded></item><item><title>Play Idea No-SBT-Build-Module With-Sources</title><description>&lt;p&gt;Just saying ... &lt;br&gt;
 Memory's not what it used to be!&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="language-bash"&gt;jamiemacbook:play-module Jamie$ play  
@@ -477,82 +531,4 @@ So, there we have it. A way of Animating between Boolean values, suitable for us
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;```
-And there we have it. Pretty simple really. There’s always another way of skinning a cat, so please let me know if you’ve faced a similar problem before and used an entirely different solution.&lt;/p&gt;</content:encoded></item><item><title>Finding An HtmlLoader DOM Element’s Absolute Position in Adobe AIR</title><description>&lt;p&gt;Being a Flash developer, and not an HTML/Javascript developer, I mistakenly thought that retrieving the absolute x/y coordinates of an element loaded into the DOM of Air’s HTMLLoader might be easy – I was wrong :(&lt;/p&gt;
-
-&lt;p&gt;I needed to find the exact position of a Captcha image within the&lt;/p&gt;</description><link>http://localhost:2368/finding-an-htmlloader-dom-elements-absolute-position-in-adobe-air/</link><guid isPermaLink="false">7e03e1cb-2d77-4e1e-ad33-050f09cf800a</guid><dc:creator>James Hill</dc:creator><pubDate>Fri, 28 Oct 2011 15:39:00 GMT</pubDate><content:encoded>&lt;p&gt;Being a Flash developer, and not an HTML/Javascript developer, I mistakenly thought that retrieving the absolute x/y coordinates of an element loaded into the DOM of Air’s HTMLLoader might be easy – I was wrong :(&lt;/p&gt;
-
-&lt;p&gt;I needed to find the exact position of a Captcha image within the loaded page, in order to do a BitmapData.draw on it. After an initial Google, it seemed there are decent Javascript functions that might achieve this, but the problem lay in not having any control over the contents of the page I was loading. Adding addition Javascript functionality to the page wasn’t an option – Big, bad DOM to the rescue!&lt;/p&gt;
-
-&lt;h2 id="usejavascripttofindposition"&gt;USE JAVASCRIPT TO FIND POSITION  &lt;/h2&gt;
-
-&lt;p&gt;Below, is the Javascript function chosen to get the Element’s absolute page position. I’ve collapsed it by default, as is long and er.. Javascript.&lt;/p&gt;
-
-&lt;p&gt;I won’t go into the code, but suffice to say that it does indeed correctly return the absolute position of an element. Credit should go to Peter-Paul Koch and Alex Tingle for the solution!&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="language-javascript"&gt;function findPositionX(obj)  
-{
-    var left = 0;
-    if(obj.offsetParent)
-    {
-        while(1)
-        {
-          left += obj.offsetLeft;
-          if(!obj.offsetParent)
-            break;
-          obj = obj.offsetParent;
-        }
-    }
-    else if(obj.x)
-    {
-        left += obj.x;
-    }
-    return left;
-}
-
-function findPosY(obj)  
-{
-    var top = 0;
-    if(obj.offsetParent)
-    {
-        while(1)
-        {
-          top += obj.offsetTop;
-          if(!obj.offsetParent)
-            break;
-          obj = obj.offsetParent;
-        }
-    }
-    else if(obj.y)
-    {
-        top += obj.y;
-    }
-    return top;
-  }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id="injectjavascriptintohtmlloadersdom"&gt;INJECT JAVASCRIPT INTO HTMLLOADER’S DOM  &lt;/h2&gt;
-
-&lt;p&gt;Now, to get the Javascript into our DOM, thereby effectively injecting it into the page we just loaded. This is a fairly easy process, and no-doubt one that will be pretty familiar to even the most novice HTML Developers, but for us Flash devs, this may not be so obvious. Once the HTMLLoader Event.COMPLETE has been fired, you can then retrieve the resulting Document Object Model, in order to inject our new Javascript functions, from the HTMLLoader.&lt;/p&gt;
-
-&lt;p&gt;Below, we create a new javascript element ‘Script’, and set it’s text property with the Javascript we want to inject, before appending the new element to the ‘head’ of the HTML page in the DOM.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="language-javascript"&gt;script = loader.window.document.createElement("script")  
-script.type = "text/javascript"  
-script.text = "function findPositionX(obj) { ---- }";  
-loader.window.document.getElementsByTagName("head")[0].appendChild( script );  
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now, if you inspect the DOM, you’ll see the page you previously loaded, contains the Javascript we just injected – cool huh!&lt;/p&gt;
-
-&lt;h2 id="puttingitintoaction"&gt;PUTTING IT INTO ACTION  &lt;/h2&gt;
-
-&lt;p&gt;So, now we have a Web page we had no control over, loaded into our HTMLLoader, will the Javascript functionlity to get our elements absolute position, added to the DOM. We can now simply retrieve a reference to our object from the DOM, and pass to the findPositionX and findPositionY functions to retrieve the position, as such…&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="language-javascript"&gt;captchaImage = dom.getElementById( "imgCaptcha" );
-
-xPos = loader.window.findPositionX( captchaImage );  
-yPos = loader.window.findPositionY( captchaImage );
-
-bitmapData.draw( loader, null, null, null,  
-    new Rectangle( xPos, yPos, captchaImage.width, captchaImage.height ) );
-&lt;/code&gt;&lt;/pre&gt;</content:encoded></item></channel></rss>
+And there we have it. Pretty simple really. There’s always another way of skinning a cat, so please let me know if you’ve faced a similar problem before and used an entirely different solution.&lt;/p&gt;</content:encoded></item></channel></rss>

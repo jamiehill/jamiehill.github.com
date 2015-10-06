@@ -8,11 +8,11 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
 
-	<link rel="shortcut icon" href="http://localhost:2368/assets/favicon.png?v=ce1bc11edb">
+	<link rel="shortcut icon" href="http://localhost:2368/assets/favicon.png?v=53bb446100">
 
-	<link rel="stylesheet" href="assets/css/all.min.css?v=ce1bc11edb">
-	<link rel="stylesheet" media="(max-width: 699px)" href="assets/css/jass_mob.min.css?v=ce1bc11edb">
-	<link rel="stylesheet" media="(min-width: 700px)" href="assets/css/jass_des.min.css?v=ce1bc11edb">
+	<link rel="stylesheet" href="assets/css/all.min.css?v=53bb446100">
+	<link rel="stylesheet" media="(max-width: 699px)" href="assets/css/jass_mob.min.css?v=53bb446100">
+	<link rel="stylesheet" media="(min-width: 700px)" href="assets/css/jass_des.min.css?v=53bb446100">
 
 	<meta name="twitter:widgets:theme" content="light">
 	<meta name="twitter:widgets:link-color" content="#2E8CDA">
@@ -244,6 +244,61 @@ AsyncRoute.defaultProps = {
 		</p>
 	</div>
 </article>
+<article class="post tag-array tag-concat tag-isarray">
+	<div class="avatar_title" id="aritcle-67">
+		<h1 class="title">
+			<a href="an-array-or-not-an-array-that-is-the-question/">An Array Or Not An Array;  That Is The Question!</a>
+		</h1>
+
+	</div>
+	<section>
+			<p></p><p>Static type checking is a big loss for me, having moved over to Javascript.  But not completely - it's a double edged sword.  Javascript's deficiencies ironically, can also be it's strengths!</p>
+
+<p>With concrete type checked languages such as <strong>Java</strong>, being able to overload functions, for different purposes is invaluable.  </p>
+
+<p>And with Javascript, it's easy to achieve the same.  Although additional logic is often required to deal with checking the type of the passed in arguments.</p>
+
+<p>Which leads me onto the purpose of this post, checking if an argument is an <code>Array</code>, and if not making it an <code>Array</code>.</p>
+
+<p>There seem myriad ways of doing this, some efficient, some not.  </p>
+
+<h1 id="arrayisarrayarr">Array.isArray(arr)  </h1>
+
+<p>Using Array's native method <code>isArray</code>, is an obvious choice, when used in a ternary expression, but is a little terse.</p>
+
+<pre><code class="language-javascript">var array = Array.isArray(arg) ? arg : [arg];  
+</code></pre>
+
+<h1 id="arginstanceofarray">(arg instanceof Array)</h1>
+
+<p>Otherwise, `instanceof' can achieve the same result, but again, we have to relie on a long winded ternary expression:</p>
+
+<pre><code class="language-javascript">var array = arg instanceof Array ? arg : [arg];  
+</code></pre>
+
+<h1 id="objectarray">'[object Array]'  </h1>
+
+<p>Or if we're just being ridiculous:</p>
+
+<pre><code class="language-javascript">var array = Object.prototype.toString.call(arg) == '[object Array]' ? arg : [arg]  
+</code></pre>
+
+<h1 id="andthewinneris">And the winner is ..  </h1>
+
+<p>But I think the winner</p>
+	</section>
+	<div class="author_read">
+		<div class="author">
+				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
+				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
+			<time class="post-date" datetime="2014-05-17"><i class="fa fa-clock-o"></i> 17 May, 2014</time>
+			<a class="disqus_comment" href="an-array-or-not-an-array-that-is-the-question/index.html#disqus_thread"></a>
+		</div>
+		<p class="read_more">
+			<a href="an-array-or-not-an-array-that-is-the-question/">read more</a>
+		</p>
+	</div>
+</article>
 <article class="post">
 	<div class="avatar_title" id="aritcle-40">
 		<h1 class="title">
@@ -278,67 +333,6 @@ play! 2.1.3 (using Java 1.6.0_45 and Scala 2.10.0), http://www.playframework.org
 		</p>
 	</div>
 </article>
-<article class="post">
-	<div class="avatar_title" id="aritcle-41">
-		<h1 class="title">
-			<a href="routing-overloaded-controller-actions-in-play-framework-2/">Routing Overloaded Controller Actions in Play Framework 2</a>
-		</h1>
-
-	</div>
-	<section>
-			<p></p><p>Came across an interesting dilema whilst trying to wire up a tree control using Play Framework 2.</p>
-
-<p>The controls api only provides one method for retrieval of initial remote data and also subsequent loading of on-demand data for updating the control. So, how to wrap two remote requests using the same controller action? Overload the controller method! Er … not quite that simple …!</p>
-
-<p>In Play, you can’t – for obvious reasons – map the same url to different actions. This still applies to overloaded methods, as the framework still sees them as two separate methods, not simply two versions of the same thing!</p>
-
-<pre><code class="language-bash"># Routes
-GET      /getData      controllers.Application.getData()  
-GET      /getData      controllers.Application.getData(nodeId)  
-</code></pre>
-
-<pre><code class="language-bash">#Controller
-public static Result getData() {  
-    // load initial remote data to populate the control
-}
-
-public static Result getData(String nodeId) {  
-    // load on-demand data to update control
-}
-</code></pre>
-
-<p>language-bash
-This is fortunately, easy to work around, by providing default parameters to a controller method, that can then decide which data it should load …  </p>
-
-<pre><code># Routes
-GET      /getData      controllers.Application.getData(id:String ?= "root")  
-</code></pre>
-
-<pre><code class="language-bash">#Controller
-public static Result getData(String id) {  
-    if (id == "root")
-        return loadRootNodes();
-    return loadNode(id);
-}
-
-public static Result loadRootNodes() {  
-    // load initial remote data to populate the control
-}
-
-public</code></pre>
-	</section>
-	<div class="author_read">
-		<div class="author">
-				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
-				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
-			<time class="post-date" datetime="2013-09-02"><i class="fa fa-clock-o"></i> 2 Sep, 2013</time>
-			<a class="disqus_comment" href="routing-overloaded-controller-actions-in-play-framework-2/index.html#disqus_thread"></a>
-		</div>
-		<p class="read_more">
-			<a href="routing-overloaded-controller-actions-in-play-framework-2/">read more</a>
-		</p>
-	</div>
-</article>
 <nav role="pagination" class="pagination">
     <a href="page/2/" class="next" data-pjax>Older Posts</a>
 </nav>
@@ -368,7 +362,7 @@ public</code></pre>
 	
 	<!-- You can safely delete this line if your theme does not require jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="assets/js/all.min.js?v=ce1bc11edb"></script>
+	<script src="assets/js/all.min.js?v=53bb446100"></script>
 
-	<script src="assets/js/count_disqus.min.js?v=ce1bc11edb"></script>
+	<script src="assets/js/count_disqus.min.js?v=53bb446100"></script>
 </body>

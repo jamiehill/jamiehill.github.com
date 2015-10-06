@@ -8,11 +8,11 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
 
-	<link rel="shortcut icon" href="http://localhost:2368/assets/favicon.png?v=ce1bc11edb">
+	<link rel="shortcut icon" href="http://localhost:2368/assets/favicon.png?v=53bb446100">
 
-	<link rel="stylesheet" href="../../assets/css/all.min.css?v=ce1bc11edb">
-	<link rel="stylesheet" media="(max-width: 699px)" href="../../assets/css/jass_mob.min.css?v=ce1bc11edb">
-	<link rel="stylesheet" media="(min-width: 700px)" href="../../assets/css/jass_des.min.css?v=ce1bc11edb">
+	<link rel="stylesheet" href="../../assets/css/all.min.css?v=53bb446100">
+	<link rel="stylesheet" media="(max-width: 699px)" href="../../assets/css/jass_mob.min.css?v=53bb446100">
+	<link rel="stylesheet" media="(min-width: 700px)" href="../../assets/css/jass_des.min.css?v=53bb446100">
 
 	<meta name="twitter:widgets:theme" content="light">
 	<meta name="twitter:widgets:link-color" content="#2E8CDA">
@@ -65,6 +65,36 @@
 	<div class="wrapper">
 		<div class="posts">
 			<article class="post">
+	<div class="avatar_title" id="aritcle-58">
+		<h1 class="title">
+			<a href="../../no-java-installed-after-osx-lion-upgrade/">No Java installed after OSX Lion upgrade</a>
+		</h1>
+
+	</div>
+	<section>
+			<p></p><p>I haven’t opened IntelliJ IDEA for a while, and was completely flabbergasted to be told that I had no Java installed when trying to do so!</p>
+
+<p>I use Java quite regularly, so was dismayed to be told it wasn’t installed. It dawned on me that I’d recently upgraded to OSX Lion, and this is where the culprit lay. The upgrade process left intact all of my other system files, so why the hell not my Java installation???</p>
+
+<p>So, here we go again – a reinstall of an OSX compatible Java kit.</p>
+
+<p>To make life easier for you all, and save you having to search for the update yourselves here’s the link…</p>
+
+<p><a href="http://support.apple.com/kb/DL1421">Re-install-Java-After-Upgrading-To-OSX-Lion-Because-They-Didn’t-Leave-Your-Previous_installation-Alone</a></p>
+	</section>
+	<div class="author_read">
+		<div class="author">
+				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
+				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
+			<time class="post-date" datetime="2011-09-08"><i class="fa fa-clock-o"></i> 8 Sep, 2011</time>
+			<a class="disqus_comment" href="../../no-java-installed-after-osx-lion-upgrade/index.html#disqus_thread"></a>
+		</div>
+		<p class="read_more">
+			<a href="../../no-java-installed-after-osx-lion-upgrade/">read more</a>
+		</p>
+	</div>
+</article>
+<article class="post">
 	<div class="avatar_title" id="aritcle-59">
 		<h1 class="title">
 			<a href="../../better-osx-terminal-font/">Better OSX Terminal Font</a>
@@ -242,62 +272,6 @@ java.lang.OutOfMemoryError: unable to create new native thread
 		</p>
 	</div>
 </article>
-<article class="post">
-	<div class="avatar_title" id="aritcle-63">
-		<h1 class="title">
-			<a href="../../capturing-async-events-from-your-mocks-using-flexunit-mockolate-and-robotlegs/">Capturing Async Events from your Mocks using FlexUnit, Mockolate and Robotlegs</a>
-		</h1>
-
-	</div>
-	<section>
-			<p></p><p>I thought I’d write this up, as being a relative new comer to using <a href="http://mockolate.org/">Mockolate</a> with my Unit Tests, I’ve spent an inexorbitant length of time trying to figure out what wasn’t working and why. If I can save some-one else even a fraction of the time I wasted, I’ll die a happy man.</p>
-
-<p>When mocking a class using <strong>Mockolate</strong> – my latest favourite new testing tool – it’s really important to make sure you set up your mock declarations, member variables and assertions in the correct order.</p>
-
-<p>To explain further, consider the following <a href="http://www.robotlegs.org/">Robotlegs</a> Command…</p>
-
-<pre><code class="language-javascript">package  
-{
-    import org.robotlegs.mvcs.Command;
-
-    public class ExampleCommand extends Command
-    {
-        override public function execute():void
-        {
-            dispatch( new Event( Event.COMPLETE ));
-        }
-    }
-}
-</code></pre>
-
-<p>You’ll notice it’s a pretty simple <strong>Robotlegs</strong> Command, that simply dispatches a Event.COMPLETE when executed.</p>
-
-<p>Important point to note, is it uses <strong>Robotleg’s</strong> eventDispatcher shortcut ‘dispatch’, rather than the inherant IEventDispatcher’s dispatcheEvent method. I’ll come back to this in a moment.</p>
-
-<p>Now let’s look at the mock implementation that was driving me spare!</p>
-
-<pre><code class="language-javascript">package  
-{
-    public class ExampleCommand extends Command
-    {
-        [Rule]
-        public var mockolate:MockolateRule = new MockolateRule();
-
-        [Mock( type="partial" )]
-        public var instance:ExampleCommad;</code></pre>
-	</section>
-	<div class="author_read">
-		<div class="author">
-				<a href="http://localhost:2368/author/james/"><img src="http://www.gravatar.com/avatar/9c737c0d0ac21a56844c7c90d80a9bd1?s=250&amp;d=mm&amp;r=x" alt="James Hill" class="avatar"></a>
-				<a class="name" href="http://localhost:2368/author/james/">James Hill</a>
-			<time class="post-date" datetime="2011-03-10"><i class="fa fa-clock-o"></i> 10 Mar, 2011</time>
-			<a class="disqus_comment" href="../../capturing-async-events-from-your-mocks-using-flexunit-mockolate-and-robotlegs/index.html#disqus_thread"></a>
-		</div>
-		<p class="read_more">
-			<a href="../../capturing-async-events-from-your-mocks-using-flexunit-mockolate-and-robotlegs/">read more</a>
-		</p>
-	</div>
-</article>
 <nav role="pagination" class="pagination">
     <a href="../4/" class="prev" data-pjax>New Posts</a>
     <a href="../6/" class="next" data-pjax>Older Posts</a>
@@ -328,7 +302,7 @@ java.lang.OutOfMemoryError: unable to create new native thread
 	
 	<!-- You can safely delete this line if your theme does not require jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="../../assets/js/all.min.js?v=ce1bc11edb"></script>
+	<script src="../../assets/js/all.min.js?v=53bb446100"></script>
 
-	<script src="../../assets/js/count_disqus.min.js?v=ce1bc11edb"></script>
+	<script src="../../assets/js/count_disqus.min.js?v=53bb446100"></script>
 </body>
