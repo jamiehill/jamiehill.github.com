@@ -1,4 +1,4 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>TiltBlog</title><description>Frontend Technology Ramblings</description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Mon, 05 Oct 2015 12:01:09 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Enabling Babel ES7 Features in SystemJS/JSPM</title><description>&lt;p&gt;Enabling &lt;a href="http://kangax.github.io/compat-table/es7/"&gt;ES7&lt;/a&gt; support in &lt;a href="https://github.com/systemjs/systemjs"&gt;SystemJS&lt;/a&gt;, is a pretty trivial thing to do, but took me a while to figure out how.  &lt;/p&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>TiltBlog</title><description>Frontend Technology Ramblings</description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Tue, 06 Oct 2015 10:34:47 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Enabling Babel ES7 Features in SystemJS/JSPM</title><description>&lt;p&gt;Enabling &lt;a href="http://kangax.github.io/compat-table/es7/"&gt;ES7&lt;/a&gt; support in &lt;a href="https://github.com/systemjs/systemjs"&gt;SystemJS&lt;/a&gt;, is a pretty trivial thing to do, but took me a while to figure out how.  &lt;/p&gt;
 
 &lt;p&gt;I'll cut to the chase and show you how:&lt;/p&gt;
 
@@ -103,7 +103,38 @@ AsyncRoute.defaultProps = {
       )
    }
 }
-&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title>Play Idea No-SBT-Build-Module With-Sources</title><description>&lt;p&gt;Just saying ... &lt;br&gt;
+&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title>Locking Down Node/NPM Versions Using Engines</title><description>&lt;p&gt;Although &lt;a href="https://nodejs.org"&gt;NodeJS&lt;/a&gt; and it's proprietary package manager, &lt;strong&gt;NPM&lt;/strong&gt;, have come on a lot in recent times, versioning can still be a mine-field, when setup projects on different systems and environments.&lt;/p&gt;
+
+&lt;p&gt;With the release of version 3.x, &lt;strong&gt;Node&lt;/strong&gt; has changed it's approach to some degree, by flattening the endless, recursively&lt;/p&gt;</description><link>http://localhost:2368/locking-down-node-npm-versions-using-engines/</link><guid isPermaLink="false">1bedd4d4-1999-4d72-8161-440dc6af9102</guid><category>node</category><category>npm</category><category>engines</category><category>versions</category><dc:creator>James Hill</dc:creator><pubDate>Sun, 02 Aug 2015 08:34:00 GMT</pubDate><content:encoded>&lt;p&gt;Although &lt;a href="https://nodejs.org"&gt;NodeJS&lt;/a&gt; and it's proprietary package manager, &lt;strong&gt;NPM&lt;/strong&gt;, have come on a lot in recent times, versioning can still be a mine-field, when setup projects on different systems and environments.&lt;/p&gt;
+
+&lt;p&gt;With the release of version 3.x, &lt;strong&gt;Node&lt;/strong&gt; has changed it's approach to some degree, by flattening the endless, recursively nested node_module folders, much to the relief of Windows users.&lt;/p&gt;
+
+&lt;p&gt;This goes some way, to mitigating the versioning issues, but the most fundimental action, you need to undertake, is locking down the versions of &lt;strong&gt;Node&lt;/strong&gt; and &lt;strong&gt;NPM&lt;/strong&gt;, that your prject requires. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;EcmaScript 2015 (ES6)&lt;/strong&gt; &lt;code&gt;let&lt;/code&gt; statements for example, just won't work under an incorrect version of &lt;strong&gt;Node&lt;/strong&gt;, but you're not going to get a warning to that affect either! &lt;/p&gt;
+
+&lt;p&gt;We can ensure that Node alert us to these issues though, fairly easily.&lt;/p&gt;
+
+&lt;h2 id="packagejsonengines"&gt;Package.json Engines  &lt;/h2&gt;
+
+&lt;p&gt;Adding an &lt;code&gt;Engines&lt;/code&gt; node to your package.json, ensures that you have the specified versions installed.  Well, when I say 'ensures', it will spit out warnings if the versions don't match.&lt;/p&gt;
+
+&lt;p&gt;For example, to specify the version of &lt;strong&gt;node&lt;/strong&gt; that your stuff works on:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-json"&gt;{
+    "engines": {
+        "node: "&amp;gt;=0.10.3 &amp;lt;0.12"
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As per Npm's &lt;a href="https://docs.npmjs.com/files/package.json"&gt;documentation&lt;/a&gt;: &lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If you specify an "engines" field, then npm will require that "node" be somewhere on that list. If "engines" is omitted, then npm will just assume that it works on node.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Suffice to say, a fairly trivial addition, but an important one, when working across large teams, on different environments.&lt;/p&gt;</content:encoded></item><item><title>Play Idea No-SBT-Build-Module With-Sources</title><description>&lt;p&gt;Just saying ... &lt;br&gt;
 Memory's not what it used to be!&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="language-bash"&gt;jamiemacbook:play-module Jamie$ play  
@@ -524,10 +555,4 @@ yPos = loader.window.findPositionY( captchaImage );
 
 bitmapData.draw( loader, null, null, null,  
     new Rectangle( xPos, yPos, captchaImage.width, captchaImage.height ) );
-&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title>Target Flash 11 and AIR 3 - Merging AIR SDK into Flex SDK</title><description>&lt;p&gt;There are many people out there that seem to go through the laborious process of manually merging the Adobe Air SDk and Adobe’s Flex SDK every time a new iteration of either comes out.&lt;/p&gt;
-
-&lt;p&gt;I’ve used this method in the past, and not only is it time consuming,&lt;/p&gt;</description><link>http://localhost:2368/target-flash-11-and-air-3-merging-air-sdk-into-flex-sdk/</link><guid isPermaLink="false">5907d105-d261-4de6-8703-ddd24d3ff3da</guid><dc:creator>James Hill</dc:creator><pubDate>Sun, 16 Oct 2011 15:28:00 GMT</pubDate><content:encoded>&lt;p&gt;There are many people out there that seem to go through the laborious process of manually merging the Adobe Air SDk and Adobe’s Flex SDK every time a new iteration of either comes out.&lt;/p&gt;
-
-&lt;p&gt;I’ve used this method in the past, and not only is it time consuming, it’s prone to errors, having not put the right thing in the right place.&lt;/p&gt;
-
-&lt;p&gt;On MacOS, dumping a folder in place of another, overwrites that folder in it’s entirety. Killing any folders that don’t exist in the folder you’re copying over the top. Not ideal. Windows is the opposite – it overwrites individual files at your prompt.&lt;/p&gt;</content:encoded></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;</content:encoded></item></channel></rss>
