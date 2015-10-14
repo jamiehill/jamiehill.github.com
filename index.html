@@ -200,15 +200,15 @@
 <pre><code class="language-javascript">import {Route} from 'react-router';
 
 export default class AsyncRoute extends Route {  
-   static defaultProps = {
-    getComponents(location, callback) {
-        System.import(this.async).then((mod) =&gt; {
-            callback(null, mod.default);
-        });
-    },
-    getChildRoutes (location, callback) {
-        callback(null, this.children || []);
-    }
+    static defaultProps = {
+        getComponents(location, callback) {
+            System.import(this.async).then((mod) =&gt; {
+                callback(null, mod.default);
+            });
+        },
+        getChildRoutes (location, callback) {
+            callback(null, this.children || []);
+        }
     }
 }
 </code></pre>
