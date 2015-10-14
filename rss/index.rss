@@ -1,4 +1,4 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>TiltBlog</title><description>Frontend Technology Ramblings</description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Tue, 13 Oct 2015 14:14:30 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Enabling Babel ES7 Features in SystemJS/JSPM</title><description>&lt;p&gt;Enabling &lt;a href="http://kangax.github.io/compat-table/es7/"&gt;ES7&lt;/a&gt; support in &lt;a href="https://github.com/systemjs/systemjs"&gt;SystemJS&lt;/a&gt;, is a pretty trivial thing to do, but took me a while to figure out how.  &lt;/p&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>TiltBlog</title><description>Frontend Technology Ramblings</description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Wed, 14 Oct 2015 05:50:39 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Enabling Babel ES7 Features in SystemJS/JSPM</title><description>&lt;p&gt;Enabling &lt;a href="http://kangax.github.io/compat-table/es7/"&gt;ES7&lt;/a&gt; support in &lt;a href="https://github.com/systemjs/systemjs"&gt;SystemJS&lt;/a&gt;, is a pretty trivial thing to do, but took me a while to figure out how.  &lt;/p&gt;
 
 &lt;p&gt;I'll cut to the chase and show you how:&lt;/p&gt;
 
@@ -67,13 +67,12 @@
 };
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;While this ticks most of the boxes, it means changing your usual usage somewhat.  Abstracting this away in say, into a dedicated class not only makes it more re-usable, but I think cleaner when implementing with React's render syntax:&lt;/p&gt;
+&lt;p&gt;While this ticks most of the boxes, it means changing your usual usage somewhat.  Abstracting this away say, into a dedicated class not only makes it more re-usable, but I think cleaner when implementing with ES6/ES7 features and React's render syntax:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="language-javascript"&gt;import {Route} from 'react-router';
 
-export default class AsyncRoute extends Route {}
-
-AsyncRoute.defaultProps = {  
+export default class AsyncRoute extends Route {  
+   static defaultProps = {
     getComponents(location, callback) {
         System.import(this.async).then((mod) =&amp;gt; {
             callback(null, mod.default);
@@ -81,6 +80,7 @@ AsyncRoute.defaultProps = {
     },
     getChildRoutes (location, callback) {
         callback(null, this.children || []);
+    }
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
